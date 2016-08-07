@@ -3,7 +3,7 @@ namespace Composite\Unit;
 
 use Composite\Unit;
 
-class LaserCannon extends Unit
+class Tank extends Unit
 {
     function addUnit(Unit $unit)
     {
@@ -15,6 +15,6 @@ class LaserCannon extends Unit
 
     function bombardStrength()
     {
-        return 44;
+        return 4;
     }
 }

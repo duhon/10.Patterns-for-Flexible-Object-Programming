@@ -3,19 +3,22 @@ namespace Composite;
 
 include 'bootstrap.php';
 
-$unit1 = new Unit\Archer();
-$unit2 = new Unit\LaserCannon();
-$army = new Army();
+$tank = new Unit\Tank();
+$tank2 = new Unit\Tank();
+$soldier = new Unit\Soldier();
+$army = new Unit\Army();
 
-$army->addUnit($unit1);
-$army->addUnit($unit2);
+$army->addUnit($soldier);
+$army->addUnit($tank);
+$army->addUnit($tank2);
+
 print $army->bombardStrength() . PHP_EOL;
 
-$army2 = clone $army;
-$army->addArmy($army2);
+$army->removeUnit($tank2);
+
 print $army->bombardStrength() . PHP_EOL;
 
 /* OUTPUT
-48
-96
+16
+12
 */
