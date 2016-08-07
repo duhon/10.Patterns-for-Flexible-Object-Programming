@@ -3,27 +3,36 @@ namespace Composite;
 
 include 'bootstrap.php';
 
-// create an army
-$main_army = new Unit\Army();
+$army1 = new Unit\Composite\Army();
+$army1->addUnit(new Unit\Archer());
+$army1->addUnit(new Unit\Archer());
 
-// add some units
-$main_army->addUnit(new Unit\Archer());
-$main_army->addUnit(new Unit\LaserCannon());
+$army2 = new Unit\Composite\Army();
+$army2->addUnit(new Unit\Archer());
+$army2->addUnit(new Unit\Archer());
+$army2->addUnit(new Unit\LaserCannon());
 
-// create a new army
-$sub_army = new Unit\Army();
-
-// add some units
-$sub_army->addUnit(new Unit\Archer());
-$sub_army->addUnit(new Unit\Archer());
-$sub_army->addUnit(new Unit\Archer());
-
-// add the second army to the first
-$main_army->addUnit($sub_army);
-
-// all the calculations handled behind the scenes
-print "attacking with strength: {$main_army->bombardStrength()}\n";
+$composite = Script::joinExisting($army2, $army1);
+print_r($composite);
 
 /* OUTPUT
-attacking with strength: 60
+Composite\Unit\Composite\Army Object
+(
+    [units:Composite\Unit\Composite:private] => SplObjectStorage Object
+        (
+            [1] => Composite\Unit\Archer Object
+            [2] => Composite\Unit\Archer Object
+            [3] => Composite\Unit\Composite\Army Object
+                (
+                    [units:Composite\Unit\Composite:private] => SplObjectStorage Object
+                        (
+                            [4] => Composite\Unit\Archer Object
+                            [5] => Composite\Unit\Archer Object
+                            [6] => Composite\Unit\LaserCannon Object
+                        )
+
+                )
+        )
+    [id:Composite\Unit:private] => 0
+)
 */

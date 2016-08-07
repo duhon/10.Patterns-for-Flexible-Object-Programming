@@ -3,7 +3,7 @@ namespace Composite\Unit;
 
 use Composite\Unit;
 
-class Army extends Unit
+abstract class Composite extends Unit
 {
     private $units;
 
@@ -25,12 +25,13 @@ class Army extends Unit
         $this->units->detach($unit);
     }
 
-    function bombardStrength()
+    function getComposite()
     {
-        $ret = 0;
-        foreach ($this->units as $unit) {
-            $ret += $unit->bombardStrength();
-        }
-        return $ret;
+        return $this;
+    }
+
+    protected function units()
+    {
+        return $this->units;
     }
 }

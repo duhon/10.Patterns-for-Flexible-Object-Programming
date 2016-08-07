@@ -11,14 +11,9 @@ abstract class Unit
         $this->id = $id++;
     }
 
-    function addUnit(Unit $unit)
+    function getComposite()
     {
-        throw new Unit\Exception(get_class($this) . " is a leaf");
-    }
-
-    function removeUnit(Unit $unit)
-    {
-        throw new Unit\Exception(get_class($this) . " is a leaf");
+        return null;
     }
 
     abstract function bombardStrength();
