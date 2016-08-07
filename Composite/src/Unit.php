@@ -11,9 +11,15 @@ abstract class Unit
         $this->id = $id++;
     }
 
-    abstract function addUnit(Unit $unit);
+    function addUnit(Unit $unit)
+    {
+        throw new Unit\Exception(get_class($this) . " is a leaf");
+    }
 
-    abstract function removeUnit(Unit $unit);
+    function removeUnit(Unit $unit)
+    {
+        throw new Unit\Exception(get_class($this) . " is a leaf");
+    }
 
     abstract function bombardStrength();
 }
