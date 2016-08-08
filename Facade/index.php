@@ -4,30 +4,15 @@ namespace Facade;
 declare(ticks=1);
 include 'bootstrap.php';
 
-$lines = Manager::getProductFileLines('data/test.txt');
-$objects = array();
-foreach ($lines as $line) {
-    $id = Manager::getIDFromLine($line);
-    $name = Manager::getNameFromLine($line);
-    $objects[$id] = Manager::getProductObjectFromID($id, $name);
-}
+$facade = new ProductFacade('data/test.txt');
+$object = $facade->getProduct(234);
 
-print_r($objects);
+print_r($object);
 
 /* OUTPUT
-Array
+Facade\Product Object
 (
-    [234] => Facade\Product Object
-        (
-            [id] => 234
-            [name] => ladies jumper
-        )
-
-    [532] => Facade\Product Object
-        (
-            [id] => 532
-            [name] => gents hat
-        )
-
+    [id] => 234
+    [name] => ladies jumper
 )
 */
