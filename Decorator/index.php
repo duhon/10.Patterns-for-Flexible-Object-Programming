@@ -4,17 +4,18 @@ namespace Decorator;
 declare(ticks=1);
 include 'bootstrap.php';
 
-$tile = new Plains();
-echo $tile->getWealthFactor(); // 2
-
-$tile = new Decorator\Diamond(new Plains());
-print $tile->getWealthFactor(); // 4
-
-$tile = new Decorator\Polluted(new Decorator\Diamond(new Plains()));
-print $tile->getWealthFactor(); // 0
+$process = new Process\Decorate\AuthenticateRequest(
+    new Process\Decorate\StructureRequest(
+        new Process\Decorate\LogRequest (
+            new Process\Main()
+        )
+    )
+);
+$process->process(new RequestHelper());
 
 /* OUTPUT
-2
-4
-0
+Decorator\Process\Decorate\AuthenticateRequest: authenticating request
+Decorator\Process\Decorate\StructureRequest: structuring request data
+Decorator\Process\Decorate\LogRequest: logging request
+Decorator\Process\Main: doing something useful with request
 */
